@@ -22,7 +22,9 @@ app.use(bodyParser({
 app.use(json());
 const path = require('path')
 const staticFiles = require('koa-static')
-app.use(staticFiles(path.join(__dirname + '/' + '../public')))
+app.use(staticFiles(path.join(__dirname + '/' + '../public'), {
+    maxage:60*60*24*1000, //缓存24小时cache-control :{max-age}实现强缓存
+}))
 // 日志中间件
 app.use(async (ctx, next) => {
     const start = new Date()
